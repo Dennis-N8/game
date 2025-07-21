@@ -1,0 +1,29 @@
+name: CI
+
+concurrency:
+  group: ci
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - ".github/**"
+      - ".vscode/**"
+      - ".devcontainer/**"
+      - ".config/**"
+
+jobs:
+  sql_migration_test:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Azure SQL SqlTask (Test)
+        uses: Azure/sql-action@v1
+        with:
+          server-name: ${{ env.DB_NAME }}
+          connection-string: ${{ env.DB_CONNECTION_STRING }}
+          sql-file: "./test.sql"
