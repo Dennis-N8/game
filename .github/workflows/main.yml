@@ -14,6 +14,15 @@ on:
       - ".devcontainer/**"
       - ".config/**"
 
+env:
+  ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
+  ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
+  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  APP_SERVICE_NAME_TEST: ${{ secrets.APP_SERVICE_NAME_TEST }}
+  APP_SERVICE_NAME_PROD: ${{ secrets.APP_SERVICE_NAME_PROD }}
+  DB_NAME: ${{ secrets.DB_NAME }}
+  DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+
 jobs:
   sql_migration_test:
     runs-on: windows-latest
